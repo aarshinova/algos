@@ -29,12 +29,12 @@ public class Palindrome {
 
     private static boolean checkIfPalindrome(String word) {
         if (word.length() <= 1) return false;
-        char[] word_array = word.toCharArray();
+        char[] wordArray = word.toCharArray();
         int length = word.length();
         int half = length % 2 == 0 ? length / 2 : length - 1 / 2;
         for (int i = 0; i < half; i++) {
-          char chStart = word_array[i];
-          char chEnd = word_array[length-i-1];
+          char chStart = wordArray[i];
+          char chEnd = wordArray[length-i-1];
           if (chStart!=chEnd) return false;
         }
         return true;
