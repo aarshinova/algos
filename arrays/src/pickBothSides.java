@@ -12,7 +12,7 @@
 //          1 + 3 + 9 => 13
 //          9 + 1 + 3 => 13
 
-public class pick_both_sides {
+public class pickBothSides {
     public static void main(String[] args) {
         int[] arr = {1, 3, 2, 5, 7, 2, 9, 5, 2};
         int b = 3;
@@ -29,24 +29,24 @@ public class pick_both_sides {
     }
 
     private static int pickBothSides(int[] A, int B) {
-            if (A.length==1) return A[0];
-            int max1 = 0;
-            int max=0;
-            for (int j = (A.length - 1); j > (A.length - B - 1); j--) {
-                max += A[j]; //16
+        if (A.length == 1) return A[0];
+        int max1 = 0;
+        int max = 0;
+        // sum from right side
+        for (int j = (A.length - 1); j > (A.length - B - 1); j--) {
+            max += A[j]; //16
+        }
+        // sum from left and right
+        int size = B;
+        for (int i = 0; i < B; i++) {
+            max1 += A[i]; //1
+            size--; //0
+            int max2 = 0;
+            for (int j = (A.length - 1); j > (A.length - size - 1); j--) {
+                max2 += A[j];
             }
-            int size = B;
-            for (int i = 0; i < B; i++) {
-                max1 += A[i]; //1
-                size--; //0
-                int max2 = 0;
-                for (int j = (A.length - 1); j > (A.length - size - 1); j--) {
-                    max2 += A[j];
-                }
-                int maxTmp = max1 + max2; //8, 6, 6
-                if (maxTmp > max) max = maxTmp; // 8
-            }
-
-            return max;
+            max = Math.max(max, max1 + max2);
+        }
+        return max;
     }
 }
