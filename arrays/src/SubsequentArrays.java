@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class subsequentArrays_solution2 {
+public class SubsequentArrays {
     public static void main(String[] args) {
         Integer[] tmp = new Integer[]{5, 1, 22, 25, 6, -1, 8, 10};
         List<Integer> arr = Arrays.asList(tmp);
@@ -25,14 +25,42 @@ public class subsequentArrays_solution2 {
     }
 
     private static boolean isValidSubsequence(List<Integer> array, List<Integer> sequence) {
-        Integer indArray = 0;
-        Integer indSeq = 0;
-        while (indArray<array.size() && indSeq<sequence.size()){
-            if (array.get(indArray).equals(sequence.get(indSeq))){
-                indSeq++;
+        if (sequence.size() > array.size()) return false;
+        HashMap<Integer, List<Integer>> charPosition = new HashMap<>();
+        for (int i = 0; i < array.size(); i++) {
+            if (charPosition.containsKey(array.get(i))) {
+                List<Integer> positions = charPosition.get(array.get(i));
+                positions.add(i);
+            } else {
+                List<Integer> positions = new ArrayList<>();
+                positions.add(i);
+                charPosition.put(array.get(i), positions);
             }
-            indArray++;
         }
-       return  (indSeq.intValue()==sequence.size());
+        List<Integer> subsqIndexes = new ArrayList<>();
+        for (Integer val:sequence){
+            if (charPosition.containsKey(val)){
+                List<Integer> positions = charPosition.get(val);
+                if (positions.size()>0)  {
+                    subsqIndexes.add(positions.get(0));
+                    positions.remove(0);
+                }
+                else {
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }
+        int prevValue = subsqIndexes.get(0);
+        for (int k=1; k<subsqIndexes.size();k++){
+            int currValue = subsqIndexes.get(k);
+            if (prevValue>=currValue){
+                return false;
+            }
+            prevValue = currValue;
+        }
+
+        return true;
     }
 }

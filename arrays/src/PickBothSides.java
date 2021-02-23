@@ -12,7 +12,7 @@
 //          1 + 3 + 9 => 13
 //          9 + 1 + 3 => 13
 
-public class pickBothSides {
+public class PickBothSides {
     public static void main(String[] args) {
         int[] arr = {1, 3, 2, 5, 7, 2, 9, 5, 2};
         int b = 3;
