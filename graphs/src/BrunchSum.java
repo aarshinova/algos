@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class BrunchSum {
+public class BranchSum {
     public static List<Integer> branchSums = null;
     public static void main(String[] args) {
 
@@ -30,25 +30,25 @@ public class BrunchSum {
         root.right.left.right = new BST(14);
         root.right.right = new BST(22);
 
-        for (Integer val : findBrunchSum(root)){
+        for (Integer val : findBranchSum(root)){
             System.out.println("Value " + val);
         }
     }
 
-    public static List<Integer> findBrunchSum(BST tree) {
+    public static List<Integer> findBranchSum(BST tree) {
         branchSums = new ArrayList<>();
         Integer currentSum = 0;
-        lookForBrunchSumInBST(tree, currentSum);
+        lookForBranchSumInBST(tree, currentSum);
         return branchSums;
     }
 
-    private static void lookForBrunchSumInBST(BST root, Integer currentSum) {
+    private static void lookForBranchSumInBST(BST root, Integer currentSum) {
         currentSum+=root.value;
         if (root.left!=null){
-            lookForBrunchSumInBST(root.left, currentSum);
+            lookForBranchSumInBST(root.left, currentSum);
         }
         if (root.right!=null){
-            lookForBrunchSumInBST(root.right, currentSum);
+            lookForBranchSumInBST(root.right, currentSum);
         }
         if (root.right==null && root.left==null){
             branchSums.add(currentSum);
