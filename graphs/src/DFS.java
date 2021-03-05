@@ -12,68 +12,66 @@
 //          1 + 3 + 9 => 13
 //          9 + 1 + 3 => 13
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ClosestBST {
-    public static int closestValue = -1;
-    public static int diff = -1;
+public class DFS {
+
     public static void main(String[] args) {
 
-        BST root = new BST(10);
-        root.left = new BST(5);
-        root.left.left = new BST(2);
-        root.left.left.left = new BST(1);
-        root.left.right = new BST(5);
-        root.right = new BST(15);
-        root.right.left = new BST(13);
-        root.right.left.right = new BST(14);
-        root.right.right = new BST(22);
-
-        var expected = 13;
-        System.out.println("Result " + findClosestValueInBst(root, 12));
+        Node graph = new Node("A");
+        graph.addChild("B").addChild("C").addChild("D");
+        graph.children.get(0).addChild("E").addChild("F");
+        graph.children.get(2).addChild("G").addChild("H");
+        graph.children.get(0).children.get(1).addChild("I").addChild("J");
+        graph.children.get(2).children.get(0).addChild("K");
+        String[] expected = {"A", "B", "E", "F", "I", "J", "C", "D", "G", "K", "H"};
+        List<String> inputArray = new ArrayList<String>();
+        System.out.println(" compare resuts " + compare(graph.depthFirstSearch(inputArray), expected));
     }
 
-    public static int findClosestValueInBst(BST tree, int target) {
-        searchInBST(tree, target);
-        return closestValue;
-    }
-
-    private static void searchInBST(BST side, int target) {
-        if (side.value==target){
-            closestValue=target;
-            return;
+    public static boolean compare(List<String> arr1, String[] arr2) {
+        if (arr1.size() != arr2.length) {
+            return false;
         }
-        int absDiff = Math.abs(target - side.value);
-        if (absDiff<diff || diff==-1){
-            diff = absDiff;
-            closestValue = side.value;
-        }
-        else if (absDiff<diff || diff==-1){
-            diff = absDiff;
-            closestValue = side.value;
-        }
-        if (side.value>target){
-            if (side.left!=null) {
-                searchInBST(side.left, target);
-            }else {
-                return;
-            }
-        }else if (side.value<target){
-            if (side.right!=null) {
-                searchInBST(side.right, target);
-            }else {
-                return;
+        for (int i = 0; i < arr1.size(); i++) {
+            if (!arr1.get(i).equals(arr2[i])) {
+                return false;
             }
         }
+        return true;
     }
 
-    static class BST {
-        public int value;
-        public BST left;
-        public BST right;
+    static class Node {
+        String name;
+        List<Node> children = new ArrayList<Node>();
 
-        public BST(int value) {
-            this.value = value;
+        public Node(String name) {
+            this.name = name;
+        }
+
+        public List<String> depthFirstSearch(List<String> array) {
+             return doDepthFirstSearch(this, array) ;
+        }
+
+
+        public List<String> doDepthFirstSearch(Node child, List<String> array) {
+            array.add(child.name);
+            if (child.children.size()!=0){
+                for (Node childTmp : child.children){
+                    doDepthFirstSearch(childTmp, array);
+                }
+            }else{
+                return array;
+            }
+            return array;
+        }
+
+        public Node addChild(String name) {
+            Node child = new Node(name);
+            children.add(child);
+            return this;
         }
     }
+
 }

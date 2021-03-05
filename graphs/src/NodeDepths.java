@@ -12,11 +12,8 @@
 //          1 + 3 + 9 => 13
 //          9 + 1 + 3 => 13
 
-import java.util.Arrays;
-
-public class ClosestBST {
-    public static int closestValue = -1;
-    public static int diff = -1;
+public class NodeDepths {
+    public static int treeDepth = 0;
     public static void main(String[] args) {
 
         BST root = new BST(10);
@@ -29,42 +26,25 @@ public class ClosestBST {
         root.right.left.right = new BST(14);
         root.right.right = new BST(22);
 
-        var expected = 13;
-        System.out.println("Result " + findClosestValueInBst(root, 12));
+        System.out.println("Result is " + findNodesDepth(root));
     }
 
-    public static int findClosestValueInBst(BST tree, int target) {
-        searchInBST(tree, target);
-        return closestValue;
+    public static int findNodesDepth(BST tree) {
+        int nbVisit = 0;
+        findNodesDepthInBST(tree, nbVisit);
+        return treeDepth;
     }
 
-    private static void searchInBST(BST side, int target) {
-        if (side.value==target){
-            closestValue=target;
-            return;
+    private static void findNodesDepthInBST(BST root, int nbVisit) {
+        nbVisit++;
+        if (root.left!=null){
+            findNodesDepthInBST(root.left, nbVisit);
         }
-        int absDiff = Math.abs(target - side.value);
-        if (absDiff<diff || diff==-1){
-            diff = absDiff;
-            closestValue = side.value;
+        if (root.right!=null){
+            findNodesDepthInBST(root.right, nbVisit);
         }
-        else if (absDiff<diff || diff==-1){
-            diff = absDiff;
-            closestValue = side.value;
-        }
-        if (side.value>target){
-            if (side.left!=null) {
-                searchInBST(side.left, target);
-            }else {
-                return;
-            }
-        }else if (side.value<target){
-            if (side.right!=null) {
-                searchInBST(side.right, target);
-            }else {
-                return;
-            }
-        }
+        treeDepth+=(nbVisit-1);
+        return;
     }
 
     static class BST {
