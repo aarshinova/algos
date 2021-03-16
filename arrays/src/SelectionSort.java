@@ -18,7 +18,6 @@ class SelectionSort {
                 j++;
             }
             swap(pos, i, array);
-
         }
         return array;
     }
