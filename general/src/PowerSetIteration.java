@@ -3,8 +3,9 @@ import java.util.*;
 class PowerSetIteration {
     public static void main(String[] args) {
         // 135 1245
-        List<Integer> input = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
-        System.out.println(powerset(input));
+        List<Integer> input = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
+        powerset(input);
+      //  System.out.println(powerset(input));
         System.out.println(powerset(input).size());
     }
 
@@ -16,11 +17,11 @@ class PowerSetIteration {
             for (int i=0; i<length; i++){
                 List<Integer> currentRes = new ArrayList<>(result.get(i));
                 System.out.println("i " + i);
-                System.out.println("length " + length);
-                System.out.println("current result " + currentRes);
+             //   System.out.println("length " + length);
+                System.out.println("current el : " + el);
                 currentRes.add(el);
-                System.out.println("current result after " + currentRes);
                 result.add(currentRes);
+                System.out.println("current result after : " + result);
             }
         }
         return result;
