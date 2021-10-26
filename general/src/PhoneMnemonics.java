@@ -22,42 +22,26 @@ class PhoneMnemonics {
         System.out.println("Result " + actual);
     }
 
-    // 2 3 4
     public static ArrayList<String> phoneNumberMnemonics(String phonenumber) {
         ArrayList<String> res = new ArrayList<>();
-        ArrayList<String> tmpRes = new ArrayList<>();
-        String ch1 = phonenumber.substring(0, 1);
-        ArrayList<String> subset1 = dict.get(ch1);
-        res.addAll(generateMnemonics(0, 1, phonenumber, "", tmpRes));
-//        for (String val : subset1) {
-//            // a
-//            generateMnemonics(1, 2, phonenumber, val, tmpRes);
-//            res.addAll(tmpRes);
-//        }
+        generateMnemonics(0, 1, phonenumber, "", res);
         return res;
     }
-// 234
     private static ArrayList<String> generateMnemonics(int i, int j, String phonenumber, String currRes, ArrayList<String> arr) {
         if (i >= phonenumber.length()) {
-            // a d g
             arr.add(currRes);
             return arr;
         }
-        // 3  4
         String nextCar = phonenumber.substring(i,j);
-        // d e f  // g h i
         ArrayList<String> subset = dict.get(nextCar);
         i++;
         j++;
         for (String val : subset) {
-            // a, d  // a, d , g // a,d, h
             currRes += val;
             generateMnemonics(i, j, phonenumber, currRes, arr);
-//            // a, d
             int len = currRes.length();
             currRes = currRes.substring(0, len-1);
         }
-
         return arr;
     }
 }
