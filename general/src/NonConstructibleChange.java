@@ -21,6 +21,6 @@ class NonConstructibleChange {
                 sum = sum  + coins[i];
             }
         }
-        return -1;
+        return sum+1;
     }
 }
