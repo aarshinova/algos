@@ -63,7 +63,7 @@ class MinHeapConstruction {
         public int peek() {
             return heap.get(0);
         }
-        
+
         public void moveDown(int currInd, List<Integer> heap) {
             while (currInd < heap.size()) {
                 int childInd1 = 2 * currInd + 1;
