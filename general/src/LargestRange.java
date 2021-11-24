@@ -12,7 +12,6 @@ class LargestRange {
         int startInd = -1;
         int endInd = -1;
 
-
         int startIndTmp = -1;
         int endIndTmp = -1;
 
