@@ -23,6 +23,14 @@ public class ArrayTest {
         changeArr(arr);
         System.out.println("Arr now " + arr[0] + " " + arr[1]);
 
+        ArrayList<Integer> arr1 = new ArrayList<>();
+        arr1.add(1);
+        arr1.add(9);
+        ArrayList<Integer> arr2 = new ArrayList<>();
+        arr2.add(1);
+        arr2.add(9);
+        System.out.println(arr1.containsAll(arr2));
+
     }
 
     private static void changeArr(int[] arr) {
