@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class ArrayTest {
     public static void main(String[] args) {
@@ -30,6 +28,12 @@ public class ArrayTest {
         arr2.add(1);
         arr2.add(9);
         System.out.println(arr1.containsAll(arr2));
+
+        Collections.sort(arr2);
+        System.out.println(arr2.get(0));
+        System.out.println(arr2.get(1));
+
+        Stack<Integer> stack = new Stack<>();
 
     }
 
