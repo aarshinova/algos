@@ -1,34 +1,33 @@
-//Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
-public class MissingNumber {
+//Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.
+//
+//
+public class FirstUniqueCharacter {
     public static void main(String[] args) {
 
     }
 
     class Solution {
-        public int missingNumber(int[] nums) {
-            // Another solution
-            // int[] arr = new int[nums.length+1];
-            // for (int i=0; i<nums.length; i++){
-            //     int pos = nums[i];
-            //     arr[pos] = 1;
-            // }
-            // for (int j=0; j<arr.length; j++){
-            //     if (arr[j]==0){
-            //         return j;
-            //     }
-            // }
+        public int firstUniqChar(String s) {
+            int[] dict = new int[26];
+            char[] arr = s.toCharArray();
 
-            int sum = 0;
-            int sumInd = 0;
-            int len = nums.length;
-            for (int i = 0; i < len; i++) {
-                sum += nums[i];
-                sumInd += i;
+            for (int i=0; i<arr.length; i++){
+                int pos = arr[i] - 'a';
+                if (dict[pos]>0) {
+                    dict[pos] *= -1;
+                }else if (dict[pos]==0){
+                    dict[pos] = i+1;
+                }
             }
 
-            sumInd += len;
+            for (int j=0; j<arr.length; j++){
+                int pos = arr[j] - 'a';
+                if (dict[pos] > 0) {
+                    return (dict[pos]-1);
+                }
+            }
 
-            return (sumInd - sum);
+            return -1;
         }
     }
 
