@@ -11,7 +11,7 @@ import java.util.Map;
  *
  * Numbers can repeat
  */
-class TwoSumRepeated {
+class   TwoSumRepeated {
     public int[] twoSum(int[] nums, int target) {
         HashMap<Integer, Integer[]> numsMap = new HashMap<>();
 
